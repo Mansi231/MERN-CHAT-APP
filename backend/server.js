@@ -69,8 +69,8 @@ const io = require('socket.io')(server, {
     // pingTimeOut:60000,
 
     cors: {
-        origin: ['http://localhost:5173', 'http://localhost:8000'],
-        // origin: 'http://localhost:5173',
+        // origin: ['http://localhost:5173', 'http://localhost:8000'],
+        origin: ['https://chit-chat-swj9.onrender.com'],
         methods: ["GET", "POST"],
         credentials: true
 
