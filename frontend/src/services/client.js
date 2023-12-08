@@ -1,6 +1,6 @@
 import axios from "axios";
 // const baseUrl = 'http://192.168.1.18:8000/api'
-const baseUrl = 'https://chit-chat-swj9.onrender.com/'
+const baseUrl = 'https://chit-chat-swj9.onrender.com/api'
 
 export const client = axios.create({
     baseURL:baseUrl,
