@@ -22,7 +22,6 @@ const Chat = () => {
   useEffect(() => {
     if(pathname == ROUTES.CHATS)getNotifications()
   }, [])
-  console.log('---chat')
 
   return (
     <div className='w-full  inset-0'>
