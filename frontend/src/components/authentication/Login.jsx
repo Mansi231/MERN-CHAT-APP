@@ -30,11 +30,11 @@ const Login = () => {
             theme: "colored",
             onClose: (props) => {
                 if (isToastOpen){
-                    isToastOpen = false;
+                    navigate(ROUTES?.CHATS)
                 }
                 else {
-                    navigate(ROUTES?.CHATS)
                     
+                    isToastOpen = false;
                     // Add your custom logic for actual close here
                 }
             },

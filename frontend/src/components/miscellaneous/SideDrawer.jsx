@@ -14,7 +14,7 @@ import { getSender } from '../config/ChatLogics';
 const SideDrawer = () => {
 
     const [search, setSearch] = useState('');
-    const [loading,setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const [searchResult, setSearchResult] = useState([]);
     const [isOpen, setIsOpen] = useState(false)
@@ -43,12 +43,14 @@ const SideDrawer = () => {
             progress: undefined,
             theme: "colored",
             onClose: (props) => {
-                console.log(isToastOpen,'---first')
-                if (isToastOpen) isToastOpen = false;
-                else {
+                console.log(isToastOpen, '---first')
+                if (isToastOpen) {
                     navigate(ROUTES.HOME)
                 }
-                console.log(isToastOpen,'---last')
+                else {
+                    isToastOpen = false;
+                }
+                console.log(isToastOpen, '---last')
 
             },
         });
@@ -128,7 +130,7 @@ const SideDrawer = () => {
                                     notification?.length > 0 ?
                                         <>
                                             {
-                                                notification.map((notify,index) => {
+                                                notification.map((notify, index) => {
                                                     return <div className='cursor-pointer w-full py-2' key={index} onClick={() => {
                                                         setSelectedChat(notify?.chatId)
                                                         setNotification(notification.filter((n) => n?._id !== notify?._id))
@@ -151,7 +153,7 @@ const SideDrawer = () => {
                         {/* profile dropdown */}
                         <div className="relative inline-block">
                             <div
-                                onClick={() => {setIsOpen(!isOpen);setShowNotifications(false)}}
+                                onClick={() => { setIsOpen(!isOpen); setShowNotifications(false) }}
                                 className="text-gray-800 hover:bg-gray-200 py-1 px-2 rounded-md focus:outline-none flex items-center md:gap-2 gap-1 cursor-pointer"
                             >
                                 <img
