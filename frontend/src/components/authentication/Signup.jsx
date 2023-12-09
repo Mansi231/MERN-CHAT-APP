@@ -29,9 +29,11 @@ const Signup = () => {
             progress: undefined,
             theme: "colored",
             onClose: (props) => {
-                if (isToastOpen) isToastOpen = false;
-                else {
+                if (isToastOpen) {
                     navigate(ROUTES?.CHATS)
+                }
+                else {
+                    isToastOpen = false;
                     // Add your custom logic for actual close here
                 }
             },
@@ -60,8 +62,8 @@ const Signup = () => {
             formData.append('password', fields?.password);
             formData.append('pic', fields?.pic);
 
-            dispatch(apiRegister(formData,showToast,setLoading))
-            apiRegister(formData,showToast,setLoading)
+            dispatch(apiRegister(formData, showToast, setLoading))
+            apiRegister(formData, showToast, setLoading)
         }
     }
 

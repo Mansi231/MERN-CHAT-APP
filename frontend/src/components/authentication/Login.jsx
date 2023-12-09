@@ -33,7 +33,6 @@ const Login = () => {
                     navigate(ROUTES?.CHATS)
                 }
                 else {
-                    
                     isToastOpen = false;
                     // Add your custom logic for actual close here
                 }

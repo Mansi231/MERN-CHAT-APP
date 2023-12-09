@@ -43,14 +43,12 @@ const SideDrawer = () => {
             progress: undefined,
             theme: "colored",
             onClose: (props) => {
-                console.log(isToastOpen, '---first')
                 if (isToastOpen) {
                     navigate(ROUTES.HOME)
                 }
                 else {
                     isToastOpen = false;
                 }
-                console.log(isToastOpen, '---last')
 
             },
         });
@@ -68,12 +66,6 @@ const SideDrawer = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "colored",
-                // onClose: (props) => {
-                //     if (isToastOpen) isToastOpen = false;
-                //     else {
-                //         navigate(ROUTES.HOME)
-                //     }
-                // },
             });
         }
         else {

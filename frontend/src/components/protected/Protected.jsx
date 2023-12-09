@@ -13,11 +13,9 @@ const Protected = ({ Component }) => {
         switch (pathname) {
             case (ROUTES?.HOME):
                 user == null  ? navigate(ROUTES?.HOME) : navigate(ROUTES?.CHATS)
-                // !user ? navigate(ROUTES?.CHATS) : navigate(ROUTES?.CHATS)
                 break;
             case (ROUTES?.CHATS):
                 user == null  ? navigate(ROUTES?.HOME) : navigate(ROUTES?.CHATS)
-                // !user ? navigate(ROUTES?.CHATS) : navigate(ROUTES?.CHATS)
                 break;
             default:
                 break;
