@@ -40,9 +40,9 @@ const ChatBox = () => {
             chatId: selectedChat?._id,
             content: newMessage
         }
-        let resData = await dispatch(sendMessageToChat(data))
         setNewMessage('')
         socket.emit('stop typing', selectedChat?._id)
+        let resData = await dispatch(sendMessageToChat(data))
         if (resData) {
             setMessages((prevMessages) => [...prevMessages, resData]);
             socket.emit('new message', resData)
