@@ -43,10 +43,13 @@ const SideDrawer = () => {
             progress: undefined,
             theme: "colored",
             onClose: (props) => {
+                console.log(isToastOpen,'---first')
                 if (isToastOpen) isToastOpen = false;
                 else {
                     navigate(ROUTES.HOME)
                 }
+                console.log(isToastOpen,'---last')
+
             },
         });
     }
