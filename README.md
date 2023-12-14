@@ -8,10 +8,10 @@ A simple MERN stack project of live chat app using socket.io.
 
 ## Built With
 
-- Express JS
-- GraphQL
-- ReactJS
 - MongoDB
+- Express JS
+- ReactJS
+- Node Js
 - Socket.io
 
 ## Getting Started
