@@ -4,7 +4,7 @@ A simple MERN stack project of live chat app using socket.io.
 
 ## Live Demo
 
-[Live Demo Link]([https://mern-stack-graphql-project.herokuapp.com/](https://chit-chat-swj9.onrender.com))
+[Live Demo Link]([(https://chit-chat-swj9.onrender.com)])
 
 ## Built With
 
