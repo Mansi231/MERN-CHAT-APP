@@ -1,1 +1,22 @@
-Full Stack GraphQL Project
+# MERN Stack Project
+
+A simple MERN stack project with socket.io.
+
+## Live Demo
+
+[Live Demo Link]([https://mern-stack-graphql-project.herokuapp.com/](https://chit-chat-swj9.onrender.com))
+
+## Built With
+
+- Express JS
+- GraphQL
+- ReactJS
+- MongoDB
+- Socket.io
+
+## Getting Started
+
+First, create MongoDB, next, set the MongoDB connection string, then run the development server:
+
+```bash
+npm run dev
