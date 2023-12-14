@@ -1,6 +1,6 @@
 # MERN Stack Project
 
-A simple MERN stack project with socket.io.
+A simple MERN stack project of live chat app using socket.io.
 
 ## Live Demo
 
