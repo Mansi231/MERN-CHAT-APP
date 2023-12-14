@@ -1,1 +1,1 @@
-simple crud operation MERN project using Graphql
+Full Stack GraphQL Project
