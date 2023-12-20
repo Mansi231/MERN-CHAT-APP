@@ -71,10 +71,7 @@ const Login = () => {
                 <span className="mx-4 text-gray-500">OR</span>
                 <div className="flex-1 border-t border-gray-300"></div>
             </div>
-            {/* <button className='bg-blue-500 rounded-md py-1 w-full px-2 self-center justify-center flex gap-2 items-center shadow-md shadow-blue-300 shadow-inner border-blue-400 border'>
-                <img src="/google.png" alt="image" className='rounded-md w-8 h-8 object-cover' />
-                <p className='text-white text-sm subpixel-antialiased'>SignIn With Google</p>
-            </button> */}
+ 
             <div className='self-center'>
                 <GoogleLogin
                     text='SignIn with Google'
