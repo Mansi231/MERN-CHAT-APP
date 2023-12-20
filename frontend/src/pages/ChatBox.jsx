@@ -9,7 +9,8 @@ import { createNotification, fetchChatMessages, sendMessageToChat } from '../red
 import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client'
 
-const ENDPOINT = 'https://chit-chat-swj9.onrender.com'
+// const ENDPOINT = 'https://chit-chat-swj9.onrender.com'
+const ENDPOINT = 'http://localhost:5173'
 var socket, selectedChatCompare;
 
 const ChatBox = () => {

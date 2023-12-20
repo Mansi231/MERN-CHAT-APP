@@ -5,8 +5,10 @@ import Spinner from '../reusable/Spinner';
 import { ToastContainer, toast } from 'react-toastify'
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from '../../services/routes';
-import {apiLogin} from '../../redux/actions/ChatAction'
-import  {useDispatch} from 'react-redux'
+import { apiLogin } from '../../redux/actions/ChatAction'
+import { useDispatch } from 'react-redux'
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
 
@@ -29,7 +31,7 @@ const Login = () => {
             progress: undefined,
             theme: "colored",
             onClose: (props) => {
-                if (isToastOpen){
+                if (isToastOpen) {
                     navigate(ROUTES?.CHATS)
                 }
                 else {
@@ -42,7 +44,7 @@ const Login = () => {
 
     const handleLogin = async () => {
         setLoading(true)
-        if (fields?.email && fields?.password) dispatch(apiLogin(fields,showToast,setLoading))
+        if (fields?.email && fields?.password) dispatch(apiLogin(fields, showToast, setLoading))
     }
 
     const getCredential = () => {
@@ -64,6 +66,29 @@ const Login = () => {
                 {loading && <Spinner />}  Login
             </button>
             <button className='bg-red-400 rounded p-2 text-white text-sm subpixel-antialiased' onClick={getCredential}>Get Guest User Credential</button>
+            <div className="flex items-center my-3">
+                <div className="flex-1 border-t border-gray-300"></div>
+                <span className="mx-4 text-gray-500">OR</span>
+                <div className="flex-1 border-t border-gray-300"></div>
+            </div>
+            {/* <button className='bg-blue-500 rounded-md py-1 w-full px-2 self-center justify-center flex gap-2 items-center shadow-md shadow-blue-300 shadow-inner border-blue-400 border'>
+                <img src="/google.png" alt="image" className='rounded-md w-8 h-8 object-cover' />
+                <p className='text-white text-sm subpixel-antialiased'>SignIn With Google</p>
+            </button> */}
+            <div className='self-center'>
+                <GoogleLogin
+                    text='SignIn with Google'
+                    size='large'
+                    onSuccess={credentialResponse => {
+                        const decodedHeader = jwtDecode(credentialResponse?.credential);
+                        console.log(credentialResponse, decodedHeader);
+                    }}
+                    useOneTap={false}
+                    onError={() => {
+                        console.log('Login Failed');
+                    }}
+                />                
+            </div>
             <ToastContainer />
         </div>
     )
