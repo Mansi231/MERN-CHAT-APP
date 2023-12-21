@@ -13,10 +13,21 @@ export const apiLogin = (fields, toast, setLoading) => (dispatch) => {
         setLoading(false)
         localStorage.setItem('userInfo', JSON.stringify(result.data))
     }).catch((err) => {
+        setLoading(false)
         console.log(err)
         return err
     })
 
+}
+
+export const apiSocialLogin = (fields, toast,setLoading) => (dispatch) => {
+    client.post('/user/socialLogin', fields).then((result) => {
+        toast()
+        setLoading(false)
+        console.log(result,'---result');
+        localStorage.setItem('userInfo', JSON.stringify(result.data))
+        console.log(result,'-result-');
+    }).catch((err) => { console.log(err); setLoading(false); return err })
 }
 
 export const apiRegister = (fields, toast, setLoading) => (dispatch) => {
@@ -139,8 +150,8 @@ export const fetchUserNotifications = () => (dispatch) => {
 }
 
 // @remove notification
-export const removeNotification = (id) => (dispatch) =>{
-    client.get(`/notification/${id}`).then((res)=>{}).catch((err)=>err)
+export const removeNotification = (id) => (dispatch) => {
+    client.get(`/notification/${id}`).then((res) => { }).catch((err) => err)
 }
 
 

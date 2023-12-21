@@ -30,7 +30,8 @@ const ChatBox = () => {
     useEffect(() => {
         socket = io(ENDPOINT)
         socket.emit('setup', user)
-        socket.on('connected', () => setSocketConnected(true))
+        console.log('-----socket',socket);
+        socket.on('connected', () => {console.log('---connected---');;setSocketConnected(true)})
         socket.on('typing', () => setIsTyping(true))
         socket.on('stop typing', () => setIsTyping(false))
     }, [socket])

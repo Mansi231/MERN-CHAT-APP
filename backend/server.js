@@ -24,13 +24,7 @@ app.use('/api/user', userRoutes)
 app.use('/api/chat', chatRoutes)
 app.use('/api/message', messageRoutes)
 app.use('/api/notification', notificationRoute)
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    next();
-});
+
 
 // ----------------------------------------------------------- deployment -----------------------------------------------------------------------
 
@@ -66,8 +60,6 @@ const port = process.env.PORT || 8000
 const server = app.listen(port, (err) => { if (err) console.log(err); else { } })
 
 const io = require('socket.io')(server, {
-    // pingTimeOut:60000,
-
     cors: {
         origin: ['http://localhost:5173', 'http://localhost:8000'],
         // origin: ['https://chit-chat-swj9.onrender.com'],

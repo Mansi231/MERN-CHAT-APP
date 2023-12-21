@@ -5,8 +5,10 @@ import { AuthContext } from '../../context/AuthProvider';
 import Spinner from '../reusable/Spinner';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../services/routes';
-import { apiRegister } from '../../redux/actions/ChatAction';
+import { apiRegister, apiSocialLogin } from '../../redux/actions/ChatAction';
 import { useDispatch } from 'react-redux';
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
+import axios from 'axios';
 
 const Signup = () => {
 
@@ -15,7 +17,7 @@ const Signup = () => {
 
     const { loading, setLoading } = useContext(AuthContext);
     const navigate = useNavigate()
-    
+
     const dispatch = useDispatch()
 
     const showToast = () => {
@@ -69,6 +71,19 @@ const Signup = () => {
         }
     }
 
+    const googleLogin = useGoogleLogin({
+        onSuccess: async (credentialResponse) => {
+            axios
+                .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${credentialResponse?.access_token}`)
+                .then(async (res) => {
+                    const { name, email, picture } = res?.data
+                    await dispatch(apiSocialLogin({ name: name, email: email, pic: picture, token: credentialResponse?.access_token }, showToast, setLoading))
+                })
+                .catch((err) => console.log(err));
+        },
+        onError: (error) => console.log("Login Failed:", error),
+    });
+
     return (
         <div className='flex flex-col gap-3 w-full mt-6'>
 
@@ -104,9 +119,10 @@ const Signup = () => {
                 <span className="mx-4 text-gray-500">OR</span>
                 <div className="flex-1 border-t border-gray-300"></div>
             </div>
-            <button className='bg-blue-500 rounded-md py-1 w-full px-2 self-center justify-center flex gap-2 items-center shadow-md shadow-blue-300 shadow-inner border-blue-400 border'>
+            <button onClick={() => googleLogin()}
+                className='bg-blue-500 rounded-md py-1 w-full px-2 self-center justify-center flex gap-2 items-center shadow-md shadow-blue-300 shadow-inner border-blue-400 border'>
                 <img src="/google.png" alt="image" className='rounded-md w-8 h-8 object-cover' />
-                <p className='text-white text-sm subpixel-antialiased'>SignUp With Google</p>
+                <p className='text-white text-sm subpixel-antialiased'>SignIn With Google</p>
             </button>
             <ToastContainer />
 
