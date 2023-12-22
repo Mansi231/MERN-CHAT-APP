@@ -9,8 +9,8 @@ import { createNotification, fetchChatMessages, sendMessageToChat } from '../red
 import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client'
 
-// const ENDPOINT = 'https://chit-chat-swj9.onrender.com'
-const ENDPOINT = 'http://localhost:5173'
+const ENDPOINT = 'https://chit-chat-swj9.onrender.com'
+// const ENDPOINT = 'http://localhost:8000'
 var socket, selectedChatCompare;
 
 const ChatBox = () => {
@@ -30,8 +30,7 @@ const ChatBox = () => {
     useEffect(() => {
         socket = io(ENDPOINT)
         socket.emit('setup', user)
-        console.log('-----socket',socket);
-        socket.on('connected', () => {console.log('---connected---');;setSocketConnected(true)})
+        socket.on('connected', () => {setSocketConnected(true)})
         socket.on('typing', () => setIsTyping(true))
         socket.on('stop typing', () => setIsTyping(false))
     }, [socket])
