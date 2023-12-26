@@ -9,8 +9,8 @@ import { createNotification, fetchChatMessages, sendMessageToChat } from '../red
 import ScrollableChat from './ScrollableChat';
 import useSocket from '../customhooks/useSocket';
 
-const ENDPOINT = 'https://chit-chat-swj9.onrender.com'
-// const ENDPOINT = 'http://localhost:8000'
+// const ENDPOINT = 'https://chit-chat-swj9.onrender.com'
+const ENDPOINT = 'http://localhost:8000'
 var socket, selectedChatCompare;
 
 const ChatBox = () => {
@@ -27,16 +27,18 @@ const ChatBox = () => {
     const [typing, setTyping] = useState(false)
     const [isTyping, setIsTyping] = useState(false)
 
-    const {connected,on,off,emmit} = useSocket(ENDPOINT)
+    const { connected, on, off, emmit } = useSocket(ENDPOINT)
 
     useEffect(() => {
-        if(connected){
-            emmit('setup',user)
-            on('typing',()=>{setTyping(true)})
-            on('stop typing',()=>setTyping(false))
+        if (connected) {
+            emmit('setup', user)
+            on('typing', () => {
+                setIsTyping(true)
+            })
+            on('stop typing', () => setIsTyping(false))
         }
 
-        return () =>{
+        return () => {
             off('typing');
             off('stop typing')
         }
@@ -59,7 +61,8 @@ const ChatBox = () => {
 
     const typingHandler = (e) => {
         setNewMessage(e.target.value)
-        if (!socketConnected) return
+        if (!connected) return
+        
         if (!typing) {
             setTyping(true)
             emmit('typing', selectedChat?._id)
@@ -88,7 +91,7 @@ const ChatBox = () => {
         }, 1000)
     }
 
-    
+
     useEffect(() => {
         fetchMessages()
         selectedChatCompare = selectedChat
@@ -113,7 +116,7 @@ const ChatBox = () => {
                     fetchMessages();
 
                 }
-              
+
             } else {
                 setMessages([...messages, newMessageReceived]);
             }
