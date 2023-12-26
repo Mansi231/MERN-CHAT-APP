@@ -21,7 +21,7 @@ const useSocket = (endpoint) => {
 
     const emmit = (event, data) => {
         if (socket) {
-            socket.emmit(event, data)
+            socket.emit(event, data)
         }
     }
 
