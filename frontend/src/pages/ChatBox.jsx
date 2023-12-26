@@ -49,11 +49,11 @@ const ChatBox = () => {
             content: newMessage
         }
         setNewMessage('')
-        emit('stop typing', selectedChat?._id)
+        emmit('stop typing', selectedChat?._id)
         let resData = await dispatch(sendMessageToChat(data))
         if (resData) {
             setMessages((prevMessages) => [...prevMessages, resData]);
-            emit('new message', resData)
+            emmit('new message', resData)
         }
     }
 
@@ -62,7 +62,7 @@ const ChatBox = () => {
         if (!socketConnected) return
         if (!typing) {
             setTyping(true)
-            emit('typing', selectedChat?._id)
+            emmit('typing', selectedChat?._id)
         }
 
         let lastTypingTime = new Date().getTime()
@@ -72,7 +72,7 @@ const ChatBox = () => {
             let timeDiff = currTime - lastTypingTime
             if (timeDiff >= timerLength && typing) {
                 setTyping(false)
-                emit('stop typing', selectedChat?._id)
+                emmit('stop typing', selectedChat?._id)
             }
         }, timerLength)
     }
@@ -84,7 +84,7 @@ const ChatBox = () => {
             let resMessages = await dispatch(fetchChatMessages(selectedChat?._id))
             setMessages(resMessages)
             setLoading(false)
-            emit('join chat', selectedChat?._id)
+            emmit('join chat', selectedChat?._id)
         }, 1000)
     }
 
