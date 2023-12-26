@@ -7,8 +7,7 @@ const useSocket = (endpoint) => {
 
     useEffect(() => {
         const newSocket = io(endpoint)
-
-        newSocket.on('connected', () => {
+        newSocket.on('connect', () => {
             setConnected(true)
         })
 
