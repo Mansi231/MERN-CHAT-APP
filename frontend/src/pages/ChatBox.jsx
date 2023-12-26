@@ -7,7 +7,7 @@ import Spinner from '../components/reusable/Spinner';
 import { useDispatch } from 'react-redux';
 import { createNotification, fetchChatMessages, sendMessageToChat } from '../redux/actions/ChatAction';
 import ScrollableChat from './ScrollableChat';
-import io from 'socket.io-client'
+import useSocket from '../customhooks/useSocket';
 
 const ENDPOINT = 'https://chit-chat-swj9.onrender.com'
 // const ENDPOINT = 'http://localhost:8000'
@@ -27,13 +27,20 @@ const ChatBox = () => {
     const [typing, setTyping] = useState(false)
     const [isTyping, setIsTyping] = useState(false)
 
+    const {connected,on,off,emmit} = useSocket(ENDPOINT)
+
     useEffect(() => {
-        socket = io(ENDPOINT)
-        socket.emit('setup', user)
-        socket.on('connected', () => {setSocketConnected(true)})
-        socket.on('typing', () => setIsTyping(true))
-        socket.on('stop typing', () => setIsTyping(false))
-    }, [socket])
+        if(connected){
+            emmit('setup',user)
+            on('typing',()=>{setTyping(true)})
+            on('stop typing',()=>setTyping(false))
+        }
+
+        return () =>{
+            off('typing');
+            off('stop typing')
+        }
+    }, [connected, emmit, on, off, user])
 
 
     const sendMessage = async () => {
@@ -42,11 +49,11 @@ const ChatBox = () => {
             content: newMessage
         }
         setNewMessage('')
-        socket.emit('stop typing', selectedChat?._id)
+        emit('stop typing', selectedChat?._id)
         let resData = await dispatch(sendMessageToChat(data))
         if (resData) {
             setMessages((prevMessages) => [...prevMessages, resData]);
-            socket.emit('new message', resData)
+            emit('new message', resData)
         }
     }
 
@@ -55,7 +62,7 @@ const ChatBox = () => {
         if (!socketConnected) return
         if (!typing) {
             setTyping(true)
-            socket.emit('typing', selectedChat?._id)
+            emit('typing', selectedChat?._id)
         }
 
         let lastTypingTime = new Date().getTime()
@@ -65,7 +72,7 @@ const ChatBox = () => {
             let timeDiff = currTime - lastTypingTime
             if (timeDiff >= timerLength && typing) {
                 setTyping(false)
-                socket.emit('stop typing', selectedChat?._id)
+                emit('stop typing', selectedChat?._id)
             }
         }, timerLength)
     }
@@ -77,12 +84,11 @@ const ChatBox = () => {
             let resMessages = await dispatch(fetchChatMessages(selectedChat?._id))
             setMessages(resMessages)
             setLoading(false)
-            socket.emit('join chat', selectedChat?._id)
+            emit('join chat', selectedChat?._id)
         }, 1000)
     }
 
-
-
+    
     useEffect(() => {
         fetchMessages()
         selectedChatCompare = selectedChat
@@ -113,11 +119,11 @@ const ChatBox = () => {
             }
         };
 
-        socket.on('message received', handleReceivedMessage);
+        on('message received', handleReceivedMessage);
 
         // Clean up the subscription when the component unmounts
         return () => {
-            socket.off('message received', handleReceivedMessage);
+            off('message received', handleReceivedMessage);
         };
     })
 
