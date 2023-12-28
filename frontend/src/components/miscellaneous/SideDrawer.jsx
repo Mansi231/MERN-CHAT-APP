@@ -122,7 +122,7 @@ const SideDrawer = () => {
                                     notification?.length > 0 ?
                                         <>
                                             {
-                                                notification.map((notify, index) => {
+                                                notification?.map((notify, index) => {
                                                     return <div className='cursor-pointer w-full py-2' key={index} onClick={() => {
                                                         setSelectedChat(notify?.chatId)
                                                         setNotification(notification.filter((n) => n?._id !== notify?._id))
