@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState ,memo } from 'react'
 import { ChatContext } from '../context/ChatProvider'
 import { getSender, getSenderProfile } from '../components/config/ChatLogics';
 import ProfileModal from '../components/miscellaneous/ProfileModal';
@@ -89,7 +89,6 @@ const ChatBox = () => {
             emmit('join chat', selectedChat?._id)
         }, 1000)
     }
-
 
     useEffect(() => {
         fetchMessages()
@@ -182,4 +181,4 @@ const ChatBox = () => {
     )
 }
 
-export default ChatBox
+export default memo(ChatBox)

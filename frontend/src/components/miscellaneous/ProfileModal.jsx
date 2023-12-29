@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 const ProfileModal = ({ isOpen, onClose ,profile }) => {
     
@@ -20,4 +20,4 @@ const ProfileModal = ({ isOpen, onClose ,profile }) => {
     )
 }
 
-export default ProfileModal
+export default memo(ProfileModal)

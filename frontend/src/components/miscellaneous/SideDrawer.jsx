@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { memo, useContext, useState } from 'react'
 import ProfileModal from './ProfileModal';
 import { ChatContext } from '../../context/ChatProvider'
 import { useNavigate } from 'react-router-dom';
@@ -195,4 +195,4 @@ const SideDrawer = () => {
     )
 }
 
-export default SideDrawer
+export default memo(SideDrawer)

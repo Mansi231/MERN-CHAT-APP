@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { memo, useContext, useEffect, useRef } from 'react'
 import { ChatContext } from '../context/ChatProvider'
 import '../styles/ChatBoxStyle.css'
 import { isLastMessage, isSameSender } from '../components/config/ChatLogics'
@@ -53,4 +53,4 @@ const ScrollableChat = ({ messages, isTyping }) => {
     )
 }
 
-export default React.memo(ScrollableChat)
+export default memo(ScrollableChat)

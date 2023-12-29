@@ -1,4 +1,4 @@
-    import React, { useContext, useState } from 'react'
+    import React, { useContext, useState , memo } from 'react'
     import { client } from '../../services/client';
     import { AuthContext } from '../../context/AuthProvider';
     import Spinner from '../reusable/Spinner';
@@ -95,4 +95,4 @@
         )
     }
 
-    export default Login
+    export default memo(Login)

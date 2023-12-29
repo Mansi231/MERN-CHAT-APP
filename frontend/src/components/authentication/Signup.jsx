@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState ,memo } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import { client } from '../../services/client';
 import { AuthContext } from '../../context/AuthProvider';
@@ -130,4 +130,4 @@ const Signup = () => {
     )
 }
 
-export default Signup
+export default memo(Signup)

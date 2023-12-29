@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { memo, useContext, useEffect, useState } from 'react'
 import { ChatContext } from '../context/ChatProvider'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchChats, removeNotification } from '../redux/actions/ChatAction';
@@ -76,4 +76,4 @@ const MyChats = () => {
   )
 }
 
-export default MyChats
+export default memo(MyChats)

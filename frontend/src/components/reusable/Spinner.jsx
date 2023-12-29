@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 const Spinner = ({border}) => {
   return (
@@ -8,4 +8,4 @@ const Spinner = ({border}) => {
   );
 };
 
-export default Spinner;
+export default memo(Spinner);

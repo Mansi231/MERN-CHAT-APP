@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react'
+import React, { Fragment, memo, useContext, useState } from 'react'
 import { ChatContext } from '../../context/ChatProvider';
 import UserBadgeItem from '../userItem/UserBadgeItem';
 import { useDispatch } from 'react-redux'
@@ -161,4 +161,4 @@ const UpdateGroupModal = ({ isOpen, onClose, profile }) => {
     )
 }
 
-export default UpdateGroupModal
+export default memo(UpdateGroupModal)

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { memo, useContext, useState } from 'react'
 import { ChatContext } from '../../context/ChatProvider';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from '../reusable/Spinner';
@@ -109,4 +109,4 @@ const GroupChatModal = ({ openGroupModal, setOpenGroupModal }) => {
     )
 }
 
-export default GroupChatModal
+export default memo(GroupChatModal)
