@@ -52,7 +52,7 @@
             setFields({ email: 'guest@example.com', password: '123456' })
         }
         
-        const googleLogin = useGoogleLogin({
+        const googleLogin = useGoogleLogin({ 
             onSuccess: async (credentialResponse) => {
                 axios
                     .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${credentialResponse?.access_token}`)
