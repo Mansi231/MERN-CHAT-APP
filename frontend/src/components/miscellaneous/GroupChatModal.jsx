@@ -68,6 +68,7 @@ const GroupChatModal = ({ openGroupModal, setOpenGroupModal }) => {
     }
 
     const handleCloseModal = () => {
+        setSearchResult([])
         setGroupChatName('')
         setLoadingUsers(false)
         setSelectedUsers([])
