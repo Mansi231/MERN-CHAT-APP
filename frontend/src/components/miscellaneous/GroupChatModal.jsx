@@ -28,7 +28,7 @@ const GroupChatModal = ({ openGroupModal, setOpenGroupModal }) => {
     const handleSearch = (searchQuery) => {
         setLoadingUsers(true)
         setSearch(searchQuery)
-        if (!search) return
+        if (!searchQuery) return
         setTimeout(async () => {
             let data = await dispatch(getSearchUsers(searchQuery))
             setSearchResult(data)
