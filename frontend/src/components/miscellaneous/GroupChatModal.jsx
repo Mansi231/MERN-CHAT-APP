@@ -28,7 +28,7 @@ const GroupChatModal = ({ openGroupModal, setOpenGroupModal }) => {
     const handleSearch = (searchQuery) => {
         setLoadingUsers(true)
         setSearch(searchQuery)
-        if (!searchQuery) return
+        if (!searchQuery) { setLoadingUsers(false); return }
         setTimeout(async () => {
             let data = await dispatch(getSearchUsers(searchQuery))
             setSearchResult(data)
@@ -50,9 +50,9 @@ const GroupChatModal = ({ openGroupModal, setOpenGroupModal }) => {
                 theme: "light",
             });
         }
-        else{
-            let data = {name:groupChatName,users:JSON.stringify(selectedUsers)}
-            dispatch(createGroupChat(data,fetchedChats,setOpenGroupModal))
+        else {
+            let data = { name: groupChatName, users: JSON.stringify(selectedUsers) }
+            dispatch(createGroupChat(data, fetchedChats, setOpenGroupModal))
         }
     }
 
@@ -67,13 +67,20 @@ const GroupChatModal = ({ openGroupModal, setOpenGroupModal }) => {
         setSelectedUsers(selectedUsers.filter(({ _id }) => _id != userToDelete?._id))
     }
 
+    const handleCloseModal = () => {
+        setGroupChatName('')
+        setLoadingUsers(false)
+        setSelectedUsers([])
+        setOpenGroupModal(false)
+    }
+
     return (
         <div className={`z-50 modal ${modalStyles}`}>
             <ToastContainer />
             <div className="modal-overlay fixed inset-0 bg-black opacity-50"></div>
 
             <div className="modal-content bg-white p-10 rounded shadow-lg z-50 w-96 text-center items-center relative">
-                <i className="fa-solid fa-xmark absolute right-2 top-1 text-lg cursor-pointer" onClick={() => setOpenGroupModal(false)}></i>
+                <i className="fa-solid fa-xmark absolute right-2 top-1 text-lg cursor-pointer" onClick={() => handleCloseModal()}></i>
                 <p className='font-sans text-2xl tracking-wide font-light mb-3'>Create Group Chat</p>
                 <div className='flex flex-col gap-3 my-4'>
                     <input type="text" value={groupChatName} placeholder='Group chat name'
