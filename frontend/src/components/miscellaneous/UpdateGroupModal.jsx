@@ -48,13 +48,13 @@ const UpdateGroupModal = ({ isOpen, onClose, profile }) => {
             });
             return
         }
-        
+
         let data = {
             chatId: selectedChat?._id,
             userId: u?._id
         }
         dispatch(removeUserFromGroup(data, setSelectedChat))
-        if(user?._id == u?._id) setSelectedChat()
+        if (user?._id == u?._id) setSelectedChat()
     }
 
     const handleAddUser = (u) => {
@@ -151,7 +151,7 @@ const UpdateGroupModal = ({ isOpen, onClose, profile }) => {
                         </div>
                     }
 
-                    <button className='bg-red-600 rounded p-2 text-white text-sm subpixel-antialiased flex justify-center align-middle w-36 self-end'>
+                    <button className='bg-red-600 rounded p-2 text-white text-sm subpixel-antialiased flex justify-center align-middle w-36 self-end' onClick={()=>handleRemove(user)}>
                         Leave Group
                     </button>
 
