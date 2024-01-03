@@ -61,8 +61,8 @@ const server = app.listen(port, (err) => { if (err) console.log(err); else { } }
 
 const io = require('socket.io')(server, {
     cors: {
-        // origin: ['http://localhost:5173', 'http://localhost:8000'],
-        origin: ['https://chit-chat-swj9.onrender.com'],
+        origin: ['http://localhost:5173', 'http://localhost:8000'],
+        // origin: ['https://chit-chat-swj9.onrender.com'],
         methods: ["GET", "POST"],
         credentials: true
 
