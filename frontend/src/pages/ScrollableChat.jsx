@@ -1,7 +1,7 @@
 import React, { memo, useContext, useEffect, useRef } from 'react'
 import { ChatContext } from '../context/ChatProvider'
 import '../styles/ChatBoxStyle.css'
-import { isLastMessage, isPrevSame, isSameSender } from '../components/config/ChatLogics'
+import { isLastMessage, isNextSame, isPrevSame, isSameSender } from '../components/config/ChatLogics'
 import TypingIndicator from '../animations/TypingIndicator'
 
 const ScrollableChat = ({ messages, isTyping }) => {
@@ -28,7 +28,7 @@ const ScrollableChat = ({ messages, isTyping }) => {
                                 !(isSameSender(messages, x, i, user?._id) && isLastMessage(messages, i, user?._id)) ? (
                                     x?.sender?._id != user?._id && <img src={x?.sender?.pic} alt="image" className='h-7 w-7 rounded-full object-cover' />
                                 ) :
-                                    x?.sender?._id != user?._id && isPrevSame(messages, x, i, user?._id)   ? <img src={x?.sender?.pic} alt="image" className='h-7 w-7 rounded-full object-cover ' />
+                                    ((x?.sender?._id != user?._id && isPrevSame(messages, x, i, user?._id)) || isNextSame(messages, x, i, user?._id)) ? <img src={x?.sender?.pic} alt="image" className='h-7 w-7 rounded-full object-cover ' />
                                         :
                                         <div className='h-7 w-7 rounded-full'></div>
                             }
